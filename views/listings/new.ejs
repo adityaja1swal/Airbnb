@@ -1,76 +1,91 @@
 <% layout('/layouts/boilerplate.ejs') -%>
-<body>
-  <form class="addNewListingForm" action="/listings" method="POST">
-    <div class="row">
-      <div class="offset-1 col-10">
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="text"
-            name="title"
-            placeholder="My Home"
-            id="title"
-            required
-          />
-          <label for="title" class="form-label">Title</label>
-        </div>
-        <div class="form-floating mb-3">
-          <textarea
-            class="form-control"
-            type="text"
-            name="description"
-            placeholder="Enter description"
-            id="description"
-            style="height: 6rem;"
-            required
-          ></textarea>
-          <label for="description" class="form-label">Description</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="text"
-            name="image"
-            placeholder="Enter Image URL/Link"
-            id="image"
-          />
-          <label for="image" class="form-label">Image URL/Link</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="number"
-            name="price"
-            placeholder="Enter price"
-            id="price"
-            required
-          />
-          <label for="price" class="form-label">Price</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="text"
-            name="location"
-            placeholder="Enter Location"
-            id="location"
-            required
-          />
-          <label for="location" class="form-label">Location</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            class="form-control"
-            type="text"
-            name="country"
-            placeholder="Enter country Name"
-            id="country"
-            required
-          />
-          <label for="country" class="form-label">Country</label>
-        </div>
-        <button class="btn btn-primary">Add</button>
+<form
+  class="row offset-1 col-10 addNewListingForm needs-validation"
+  action="/listings"
+  method="POST"
+  novalidate
+>
+  <div class="row">
+    <div class="offset-1 col-10">
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="text"
+          name="title"
+          placeholder="My Home"
+          id="title"
+          required
+        />
+        <label for="title" class="form-label">Title</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a title.</div>
       </div>
+      <div class="form-floating mb-3">
+        <textarea
+          class="form-control"
+          type="text"
+          name="description"
+          placeholder="Enter description"
+          id="description"
+          style="height: 6rem"
+          required
+        ></textarea>
+        <label for="description" class="form-label">Description</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a description.</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="text"
+          name="image"
+          placeholder="Enter Image URL/Link"
+          id="image"
+        />
+        <label for="image" class="form-label">Image URL/Link</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid image URL.</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="number"
+          name="price"
+          placeholder="Enter price"
+          id="price"
+          required
+        />
+        <label for="price" class="form-label">Price</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a price.</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="text"
+          name="location"
+          placeholder="Enter Location"
+          id="location"
+          required
+        />
+        <label for="location" class="form-label">Location</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a location.</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="text"
+          name="country"
+          placeholder="Enter country Name"
+          id="country"
+          required
+        />
+        <label for="country" class="form-label">Country</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a country.</div>
+      </div>
+      <button class="btn btn-primary" type="submit">Add</button>
     </div>
-  </form>
-</body>
+  </div>
+</form>
