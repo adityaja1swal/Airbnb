@@ -1,0 +1,65 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+<body>
+  <form class="addNewListingForm" action="/listings/<%= listingInfo.id %>?_method=PUT" method="POST">
+    <div class="row">
+      <div class="offset-2 col-8">
+        <div class="form-floating mb-3">
+          <input
+            class="form-control"
+            type="text"
+            name="title"
+            placeholder="My Home"
+            id="title"
+            value="<%= listingInfo.title %>"
+          />
+          <label for="title" class="form-label">Title</label>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            type="text"
+            name="description"
+            placeholder="Enter description"
+            id="description"
+            style="height: 6rem;"
+          ><%= listingInfo.description %></textarea>
+          <label for="description" class="form-label">Description</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            class="form-control"
+            type="text"
+            name="image"
+            placeholder="Enter Image URL/Link"
+            id="image"
+            value="<%= listingInfo.image.url %>"
+          />
+          <label for="image" class="form-label">Image URL/Link</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            class="form-control"
+            type="number"
+            name="price"
+            placeholder="Enter price"
+            id="price"
+            value="<%= listingInfo.price %>"
+          />
+          <label for="price" class="form-label">Price</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            class="form-control"
+            type="text"
+            name="country"
+            placeholder="Enter country Name"
+            id="country"
+            value="<%= listingInfo.country %>"
+          />
+          <label for="country" class="form-label">Country</label>
+        </div>
+        <button class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </form>
+</body>

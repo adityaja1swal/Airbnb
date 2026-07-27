@@ -1,0 +1,53 @@
+body {
+  font-family: "Arvo", serif;
+}
+
+.navbar {
+  height: 5rem !important;
+  z-index: 1;
+  background-color: #eee;
+}
+
+.addNewListingForm {
+  margin: 1rem;
+}
+
+.listingCard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: Center;
+}
+
+.card-img-top{
+  height: 12rem;
+  background-size: cover;
+}
+
+/* Brand Icon */
+.navbar-brand-icon {
+  font-size: 2rem;
+  color: rgb(249, 120, 120);
+}
+
+.hover-opacity-point5:hover {
+  opacity: .5;
+}
+
+/* Show page */
+.showCardBtn {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Footer */
+
+footer {
+  background: #ddd;
+  height: 10rem;
+  width: 100vw;
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

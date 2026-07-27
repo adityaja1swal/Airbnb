@@ -1,0 +1,20 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+<body>
+    <div class="listingCard">
+      <% for(let listing of allListings) { %>
+        <a href="/listings/<%= listing.id %>" style="text-decoration: none;">
+          <div class="card" style="width: 18rem;">
+            <img src="<%= listing.image.url %>" class="card-img-top hover-opacity-point5" alt="Listing">
+            <div class="card-body">
+              <p class="card-text"><%= listing.title %>
+              <br>
+              &#8377; <%= listing.price %>
+              <br>
+              <%= listing.country %></p>
+            </div>
+          </div>
+        </a>
+      <% } %>
+    </div>
+  </div>
+</body>
