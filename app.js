@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -25,6 +26,16 @@ app.use(
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 dotenv.config();
+
+const validateListing = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body ? req.body : {});
+  if (error) {
+    let errMsg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(400, errMsg);
+  } else {
+    next();
+  }
+};
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
@@ -56,10 +67,8 @@ app.get("/listings/new", (req, res) => {
 
 app.post(
   "/listings",
+  validateListing,
   wrapAsync(async (req, res, next) => {
-    if (!req.body) {
-      throw new ExpressError(400, "Send valid data for listing");
-    }
     let { title, description, image, price, location, country } = req.body;
     let newListing = new Listing({
       title,
@@ -94,10 +103,8 @@ app.get(
 
 app.put(
   "/listings/:id",
+  validateListing,
   wrapAsync(async (req, res) => {
-    if (!req.body) {
-      throw new ExpressError(400, "Send valid data for listing");
-    }
     const { id } = req.params;
     let { title, description, image, price, location, country } = req.body;
     await Listing.findOneAndReplace(
@@ -130,7 +137,7 @@ app.all(/.*/, (req, res, next) => {
 
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something Went Wrong" } = err;
-  res.status(statusCode).render("listings/error.ejs", {message});
+  res.status(statusCode).render("listings/error.ejs", { message });
 });
 
 app.listen(8080, () => {
