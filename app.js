@@ -7,6 +7,7 @@ const path = require("node:path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -56,6 +57,9 @@ app.get("/listings/new", (req, res) => {
 app.post(
   "/listings",
   wrapAsync(async (req, res, next) => {
+    if (!req.body) {
+      throw new ExpressError(400, "Send valid data for listing");
+    }
     let { title, description, image, price, location, country } = req.body;
     let newListing = new Listing({
       title,
@@ -91,6 +95,9 @@ app.get(
 app.put(
   "/listings/:id",
   wrapAsync(async (req, res) => {
+    if (!req.body) {
+      throw new ExpressError(400, "Send valid data for listing");
+    }
     const { id } = req.params;
     let { title, description, image, price, location, country } = req.body;
     await Listing.findOneAndReplace(
@@ -117,8 +124,13 @@ app.delete(
   }),
 );
 
+app.all(/.*/, (req, res, next) => {
+  next(new ExpressError(404, "Page Not Found"));
+});
+
 app.use((err, req, res, next) => {
-  res.send("Somthing went Wrong");
+  let { statusCode = 500, message = "Something Went Wrong" } = err;
+  res.status(statusCode).render("listings/error.ejs", {message});
 });
 
 app.listen(8080, () => {
