@@ -14,11 +14,11 @@ const reviewSchema = new schema({
     max : 5
   },
   createdAt: {
-    type: date,
+    type: Date,
     default : Date.now()
   },
 });
 
 const Review = mongoose.model("Review", reviewSchema);
 
-module.exports = Listing;
+module.exports = Review;
