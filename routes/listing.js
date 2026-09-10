@@ -41,6 +41,7 @@ router.post(
       country,
     });
     await newListing.save();
+    req.flash("success", "New listing created!");
     res.redirect("/listings");
   }),
 );
@@ -80,6 +81,7 @@ router.put(
         country,
       },
     );
+    req.flash("success", "Listing updated!");
     res.redirect(`/listings/${id}`);
   }),
 );
@@ -89,6 +91,7 @@ router.delete(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing deleted!");
     res.redirect("/listings");
   }),
 );
