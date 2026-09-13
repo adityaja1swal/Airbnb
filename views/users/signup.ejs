@@ -1,0 +1,54 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+
+<form
+  class="row offset-2 col-8 addNewListingForm needs-validation"
+  action="/user/signup"
+  method="POST"
+  novalidate
+>
+  <div class="row">
+    <div class="offset-1 col-10">
+      <h3 class="mb-3">SignUp on Wanderlust</h3>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          placeholder="My Home"
+          id="email"
+          required
+        />
+        <label for="email" class="form-label">Email</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid email.</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="text"
+          name="username"
+          placeholder="Enter username"
+          id="username"
+          required
+        />
+        <label for="username" class="form-label">Username</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid Username.</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          id="password"
+          required
+        />
+        <label for="password" class="form-label">Password</label>
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please provide a password.</div>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+  </div>
+</form>
