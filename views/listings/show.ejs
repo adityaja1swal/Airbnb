@@ -10,12 +10,19 @@
       alt="Listing"
     />
     <div class="card-body">
-      <p class="card-text mb-2"><%= listingInfo.description %></p>
-      <p class="card-text">
+      <p class="card-text mb-1">
+        Owner by
+        <i>
+          <%=  listingInfo.owner.username %>
+        </i>
+      </p>
+      <p class="card-text"> <%= listingInfo.description %>
+        <br>
         &#8377; <%= listingInfo.price.toLocaleString("en-IN") %>
         <br />
         <%= listingInfo.country %>
       </p>
+      <% if(currentUser && currentUser._id.equals(listingInfo.owner._id)) { %>
       <div class="showCardBtn">
         <form action="/listings/<%= listingInfo.id %>/edit" method="get">
           <button class="btn btn-info">Edit</button>
@@ -27,6 +34,7 @@
           <button class="btn btn-danger">Delete</button>
         </form>
       </div>
+      <% } %>
     </div>
   </div>
   <div class="col-8 offset-2 mb-3" style="max-width: 2040px">
