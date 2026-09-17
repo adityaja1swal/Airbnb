@@ -2,6 +2,7 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
 const Listing = require("./models/listing.js");
+const Review = require("./models/review.js");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -27,7 +28,7 @@ module.exports.isOwner = wrapAsync(async (req, res, next) => {
     req.flash("error", "Property not exist!");
     return res.redirect("/listings");
   }
-  if (!listing.owner || !listing.owner.equals(req.user._id)) {
+  if (!listing.owner || (listing.owner != req.user._id)) {
     req.flash("error", "You are not the owner of this listings!");
     return res.redirect(`/listings/${id}`);
   }
@@ -53,3 +54,14 @@ module.exports.validateReview = (req, res, next) => {
     next();
   }
 };
+
+module.exports.isReviewAuthor = wrapAsync(async (req, res, next) => {
+  const { reviewId , id} = req.params;
+  const review = await Review.findById(reviewId);
+  
+  if (!review || !(review.author.equals(req.user._id))) {
+    req.flash("error", "You are not the author of this review!");
+    return res.redirect(`/listings/${id}`);
+  }
+  next();
+});

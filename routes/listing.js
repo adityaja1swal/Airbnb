@@ -42,7 +42,7 @@ router.get(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listingInfo = await Listing.findById(id)
-      .populate("reviews")
+      .populate({ path: "reviews", populate: { path: "author" } })
       .populate("owner");
     if (!listingInfo) {
       req.flash("error", "Property not exist!");
@@ -69,7 +69,8 @@ router.get(
 );
 
 router.put(
-  "/:id", isOwner,
+  "/:id",
+  isOwner,
   isLoggedIn,
   validateListing,
   wrapAsync(async (req, res) => {
@@ -94,7 +95,8 @@ router.put(
 
 router.delete(
   "/:id",
-  isLoggedIn, isOwner,
+  isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
