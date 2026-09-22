@@ -15,20 +15,8 @@ const listingSchema = new schema({
     type: String,
   },
   image: {
-    type: Object,
-    default: { url: defaultImageUrl },
-    set: (v) => {
-      if (v === "" || v == null) {
-        return { url: defaultImageUrl };
-      }
-      if (typeof v === "string") {
-        return { url: v };
-      }
-      if (typeof v === "object" && v.url === "") {
-        return { url: defaultImageUrl };
-      }
-      return v;
-    },
+    url: String,
+    filename: String,
   },
   price: {
     type: Number,

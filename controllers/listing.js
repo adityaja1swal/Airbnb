@@ -23,11 +23,12 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-  let { title, description, image, price, location, country } = req.body;
+  let { path, filename } = req.file || {};
+  let { title, description, price, location, country } = req.body;
   let newListing = new Listing({
     title,
     description,
-    image: image ? { url: image } : undefined,
+    image: req.file ? { url: path, filename } : undefined,
     price,
     location,
     country,

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+dotenv.config();
 const path = require("node:path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -15,6 +16,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const { deserialize } = require("node:v8");
+const multer = require("multer");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -31,7 +33,6 @@ app.use(
 );
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-dotenv.config();
 
 const sessionOptions = {
   secret: "mysupersecretcode",

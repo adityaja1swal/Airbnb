@@ -4,6 +4,7 @@
   action="/listings"
   method="POST"
   novalidate
+  enctype="multipart/form-data"
 >
   <div class="row">
     <div class="offset-1 col-10">
@@ -34,15 +35,14 @@
         <div class="valid-feedback">Looks good!</div>
         <div class="invalid-feedback">Please provide a description.</div>
       </div>
-      <div class="form-floating mb-3">
+      <div class="mb-3">
+        <label for="image" class="form-label" style="font-weight: 450; font-size:small;">Upload Listing Image</label>
         <input
           class="form-control"
-          type="text"
+          type="file"
           name="image"
-          placeholder="Enter Image URL/Link"
           id="image"
         />
-        <label for="image" class="form-label">Image URL/Link</label>
         <div class="valid-feedback">Looks good!</div>
         <div class="invalid-feedback">Please provide a valid image URL.</div>
       </div>

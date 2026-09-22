@@ -82,14 +82,14 @@
       <% for(review of listingInfo.reviews) {%>
         <div class="card col-5 ms-4 me-3 mb-3">
           <div class="card-body">
-            <h6 class="card-subtitle mb-1">@<%= review.author.username %></h6>
+            <h6 class="card-subtitle mb-1">@<%= review.author && review.author.username ? review.author.username : "User" %></h6>
             <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
             <p class="card-text"><%= review.comment %></p>
           </div>
-          <% if(currentUser) { %>
-          <form method="POST" action="<%= listingInfo.id %>/reviews/<%= review.id %>?_method=DELETE">
-            <button class="btn btn-sm btn-danger mb-2 ms-2">Delete</button>
-          </form>
+          <% if (currentUser && review.author && review.author._id && currentUser._id.equals(review.author._id)) { %>
+            <form method="POST" action="<%= listingInfo.id %>/reviews/<%= review.id %>?_method=DELETE">
+              <button class="btn btn-sm btn-danger mb-2 ms-2">Delete</button>
+            </form>
           <% } %>
         </div>
       <% } %>

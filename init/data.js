@@ -300,7 +300,7 @@ const sampleListings = [
     country: "Japan",
   },
   {
-    title: "Lakefront Cabin",
+    title: "Lakefront Cabin in New Hampshire",
     description:
       "Spend your days by the lake in this cozy cabin in the scenic White Mountains of New Hampshire.",
     image: {
@@ -336,7 +336,7 @@ const sampleListings = [
     country: "United States",
   },
   {
-    title: "Secluded Beach House",
+    title: "Secluded Beach House in Costa Rica",
     description:
       "Escape to a secluded beach house on the Pacific coast of Costa Rica. Surf, relax, and unwind.",
     image: {
