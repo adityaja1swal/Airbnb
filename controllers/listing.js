@@ -47,24 +47,27 @@ module.exports.renderEditForm = async (req, res) => {
     res.redirect("/listings");
     return;
   }
-  res.render("listings/edit.ejs", { listingInfo });
+
+  let originalImageUrl = listingInfo.image.url;
+  originalImageUrl.replace("/upload", "/upload/h_300,w_250,e_blur");
+  res.render("listings/edit.ejs", { listingInfo, originalImageUrl});
 };
 
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
-  let { title, description, image, price, location, country } = req.body;
-  await Listing.findByIdAndUpdate(
+  let { path, filename } = req.file || {};
+  let listing = await Listing.findByIdAndUpdate(
     id,
     {
-      title,
-      description,
-      image: image ? { url: image } : undefined,
-      price,
-      location,
-      country,
+      ...req.body,
     },
     { new: true },
   );
+
+  if (req.file) {
+    listing.image = { url: path, filename };
+    await listing.save();
+  }
   req.flash("success", "Listing updated!");
   res.redirect(`/listings/${id}`);
 };
