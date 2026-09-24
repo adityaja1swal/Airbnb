@@ -24,13 +24,17 @@
       href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/rating.css">
+    <link rel="stylesheet" href="/css/rating.css" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.30.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.30.0/mapbox-gl.js"></script>
   </head>
   <body>
     <%- include('../includes/navbar.ejs'); %>
     <div class="container">
-      <%- include('../includes/flash.ejs'); %>
-      <%- body -%>
+      <%- include('../includes/flash.ejs'); %> <%- body -%>
     </div>
     <%- include('../includes/footer.ejs') %>
 
