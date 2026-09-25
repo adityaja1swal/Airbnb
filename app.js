@@ -15,8 +15,6 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-const { deserialize } = require("node:v8");
-const multer = require("multer");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -65,17 +63,6 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
-
-app.get("/demouser", async (req, res) => {
-  let fakeUser = new User({
-    email: "student@gmail.com",
-    username: "delta-student",
-  });
-
-  let registeredUser = await User.register(fakeUser, "helloworld");
-  res.send(registeredUser);
-});
-
 
 
 app.use("/listings", listingRouter);

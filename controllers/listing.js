@@ -49,7 +49,9 @@ module.exports.renderEditForm = async (req, res) => {
   }
 
   let originalImageUrl = listingInfo.image.url;
-  originalImageUrl.replace("/upload", "/upload/h_300,w_250,e_blur");
+  if(originalImageUrl){
+    originalImageUrl.replace("/upload", "/upload/h_300,w_250,e_blur");
+  }
   res.render("listings/edit.ejs", { listingInfo, originalImageUrl});
 };
 
