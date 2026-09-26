@@ -37,7 +37,7 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    expires: Date.now + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   },
@@ -71,6 +71,10 @@ app.use("/user", userRouter);
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
+  app.listen(8080, () => {
+    console.log("server is listening on port 8080");
+  });
+
 }
 
 main()
@@ -88,8 +92,4 @@ app.all(/.*/, (req, res, next) => {
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something Went Wrong" } = err;
   res.status(statusCode).render("listings/error.ejs", { message });
-});
-
-app.listen(8080, () => {
-  console.log("server is listening on port 8080");
 });

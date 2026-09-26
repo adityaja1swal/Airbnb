@@ -1,4 +1,4 @@
-const { ref } = require("joi");
+const { ref, required } = require("joi");
 const mongoose = require("mongoose");
 const Review = require("./review.js");
 
@@ -35,6 +35,17 @@ const listingSchema = new schema({
     type: schema.Types.ObjectId,
     ref: "User",
   },
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
@@ -42,7 +53,6 @@ listingSchema.post("findOneAndDelete", async (listing) => {
     await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
 });
-
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
